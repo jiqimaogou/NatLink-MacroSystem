@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-  
+import os
+
+#--- Targets section -------------------------------------------------------
+
+targets.mapping = {
+
+        # Python-specific targets.
+        "(python | pie) (library | lib)":      website("http://docs.python.org/library/"),
+        "(python | pie) home":                 website("http://www.python.org/"),
+
+        # Dragonfly-specific targets.
+        "dragonfly page":                      website("http://code.google.com/p/dragonfly/"),
+        "dragonfly modules page":              website("http://code.google.com/p/dragonfly-modules/"),
+        "speech computing":                    website("http://www.speechcomputing.com/forum"),
+        "[natlink] macros":                    folder(r"C:\Program Files\NatLink\MacroSystem"),
+        "dragonfly lib":                       folder(r"C:\Python25\Lib\site-packages\dragonfly"),
+        # 系统环境变量
+        "win dir":                       folder(os.environ.get('WINDIR')),
+        "home path":                       folder(os.environ.get('HOMEPATH')),
+        "app data":                       folder(os.environ.get('APPDATA')),
+        "program files":                       folder(os.environ.get('ProgramFiles')),
+
+        }
+
+#--- Language section ------------------------------------------------------
+
+lang.bring_me = "bring me <target>"
+# Command to bring a target; must contain the
+#  <target> extra.
+# Default: "bring me <target>"
+
+lang.paste_me = "paste me <target>"
+# Command to paste the location of a target;
+#  must contain the <target> extra.
+# Default: "bring me <target>"

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-  
 #
 # This file is a command-module for Dragonfly.
 # (c) Copyright 2008 by Christo Butcher
@@ -94,7 +95,9 @@ class BringableBase(object):
 
 class website(BringableBase):
     def bring_it(self):
-        subprocess.Popen([r"C:\Program Files\Mozilla Firefox\firefox.exe", self.target])
+        target = self.target
+        subprocess.Popen(["explorer", target])
+        # subprocess.Popen([r"C:\Program Files\Mozilla Firefox\firefox.exe", self.target])
 #        webbrowser.open(self.target)
 
 class folder(BringableBase):
@@ -157,11 +160,11 @@ class BringRule(CompoundRule):
         target = extras["target"]
         self._log.debug("%s: bringing target %s." % (self, target))
         # class BringableBase(object):
-            # def __init__(self, target):构造函数
-                # class website子类(BringableBase):
-                # class folder子类(BringableBase):
-                # class open子类(BringableBase):
-                # class ssh子类(BringableBase):
+        # def __init__(self, target):构造函数
+        # class website子类(BringableBase):
+        # class folder子类(BringableBase):
+        # class open子类(BringableBase):
+        # class ssh子类(BringableBase):
         target.bring_it()
 
 

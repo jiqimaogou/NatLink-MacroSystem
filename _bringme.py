@@ -77,7 +77,7 @@ import webbrowser
 import subprocess
 
 from dragonfly import (Grammar, Choice, CompoundRule,
-                       Paste, Config, Section, Item)
+        Paste, Config, Section, Item)
 
 
 #---------------------------------------------------------------------------
@@ -122,24 +122,24 @@ class ssh(BringableBase):
 config = Config("bring me")
 config.targets         = Section("Targets section")
 config.targets.mapping = Item(
-                              default={
-                                       "my site": website("http://www.google.com"),
-                                      },
-                              doc="Mapping of spoken targets to bringable targets.",
-                              namespace={
-                                         "website":  website,
-                                         "open":     open,
-                                         "folder":   folder,
-                                         "ssh":      ssh,
-                                        },
-                             )
+        default={
+            "my site": website("http://www.google.com"),
+            },
+        doc="Mapping of spoken targets to bringable targets.",
+        namespace={
+            "website":  website,
+            "open":     open,
+            "folder":   folder,
+            "ssh":      ssh,
+            },
+        )
 config.lang            = Section("Language section")
 config.lang.bring_me   = Item("bring me <target>",
-                              doc="Command to bring a target;"
-                                  " must contain the <target> extra.")
+        doc="Command to bring a target;"
+        " must contain the <target> extra.")
 config.lang.paste_me   = Item("paste me <target>",
-                              doc="Command to paste the location of a target;"
-                                  " must contain the <target> extra.")
+        doc="Command to paste the location of a target;"
+        " must contain the <target> extra.")
 config.load()
 
 
@@ -148,12 +148,20 @@ config.load()
 
 class BringRule(CompoundRule):
 
+    # lang.bring_me = "bring me <target>"
     spec = config.lang.bring_me
+    # targets.mapping = {
     extras = [Choice("target", config.targets.mapping)]
 
     def _process_recognition(self, node, extras):
         target = extras["target"]
         self._log.debug("%s: bringing target %s." % (self, target))
+        # class BringableBase(object):
+            # def __init__(self, target):构造函数
+                # class website子类(BringableBase):
+                # class folder子类(BringableBase):
+                # class open子类(BringableBase):
+                # class ssh子类(BringableBase):
         target.bring_it()
 
 
@@ -162,7 +170,9 @@ class BringRule(CompoundRule):
 
 class PasteRule(CompoundRule):
 
+    # lang.paste_me = "paste me <target>"
     spec = config.lang.paste_me
+    # targets.mapping = {
     extras = [Choice("target", config.targets.mapping)]
 
     def _process_recognition(self, node, extras):
@@ -172,7 +182,7 @@ class PasteRule(CompoundRule):
 
 
 #---------------------------------------------------------------------------
-# Create and manage this module's grammar.
+# Create and manage this module's grammar.创建并管理这个模块的语法。
 
 grammar = Grammar("bring me")
 grammar.add_rule(BringRule())
